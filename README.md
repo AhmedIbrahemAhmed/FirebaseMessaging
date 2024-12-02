@@ -1,16 +1,12 @@
 # task1
 
-A new Flutter project.
 
-## Getting Started
+## Setup
 
-This project is a starting point for a Flutter application.
+downloaded flutter along with command line tools for android and used vs code for developing the project.
 
-A few resources to get you started if this is your first Flutter project:
+## this is a simple project to get familiar with firebase notifications.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+##GPT
+chat gpt helped in setting the environment and solving errors and bugs and giving hints to how to implement the task.
+but it can give some wrong informations sometimes and using it too much can kill creativity and give basic structure that can lead to security issues.
