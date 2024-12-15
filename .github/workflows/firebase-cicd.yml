@@ -1,0 +1,50 @@
+name: Firebase CI/CD
+
+on:
+  push:
+    branches:
+      - main  # Run the workflow only when changes are pushed to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+
+    steps:
+    # Step 1: Checkout the code
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Step 2: Set up Flutter
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: 'latest'
+
+    # Step 3: Install dependencies
+    - name: Install dependencies
+      run: flutter pub get
+
+    # Step 4: Run tests (optional)
+    - name: Run Flutter tests
+      run: flutter test
+
+    # Step 5: Build APK or iOS IPA
+    - name: Build APK
+      run: flutter build apk --release
+
+    # Step 6: Upload to Firebase App Distribution
+    - name: Upload APK to Firebase App Distribution
+      env:
+        FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+      run: |
+        echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" > firebase.json
+        curl -sL https://firebase.tools | bash
+        firebase auth:login --no-localhost --token "$(cat firebase.json | jq -r '.private_key')"
+        firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk \
+          --app ${{ secrets.FIREBASE_APP_ID }} \
+          --release-notes "Automated build from GitHub Actions" \
+          --debug
+
