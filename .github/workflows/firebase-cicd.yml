@@ -3,7 +3,7 @@ name: Firebase CI/CD
 on:
   push:
     branches:
-      - main  # Run the workflow only when changes are pushed to the main branch
+      - task4_test  # Run the workflow only when changes are pushed to the main branch
 
 jobs:
   build:
