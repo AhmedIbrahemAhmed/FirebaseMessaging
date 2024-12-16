@@ -1,8 +1,1 @@
-{"hosting": {
-    "public": "public",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ]
-  }}
+{"flutter":{"platforms":{"android":{"default":{"projectId":"notifications-channels","appId":"1:43492415987:android:92d8daca83869328d81a86","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"notifications-channels","configurations":{"android":"1:43492415987:android:92d8daca83869328d81a86"}}}}}}
