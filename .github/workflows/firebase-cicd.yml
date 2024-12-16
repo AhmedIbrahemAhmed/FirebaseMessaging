@@ -27,19 +27,28 @@ jobs:
     - name: Install dependencies
       run: flutter pub get
 
-    # Step 5: Build APK or iOS IPA
+    # Step 4: Build APK or iOS IPA
     - name: Build APK
       run: flutter build apk --release
 
-    # Step 6: Upload to Firebase App Distribution
-    - name: Upload APK to Firebase App Distribution
+      # Step 5: Install Firebase CLI
+    - name: Install Firebase CLI
+      run: |
+        curl -sL https://firebase.tools | bash
+        sudo mv firebase-tools /usr/local/bin/firebase
+        firebase --version  # Check if firebase is installed correctly
+
+    # Step 6: Authenticate with Firebase using the CI token
+    - name: Authenticate with Firebase CLI
       run: |
         # Authenticate with Firebase CLI using the CI token from GitHub Secrets
         firebase login:ci --token ${{ secrets.FIREBASE_AUTH_TOKEN }}
       
-        # Upload APK to Firebase App Distribution
+        # Step 8: Upload APK to Firebase App Distribution
+    - name: Upload APK to Firebase App Distribution
+      run: |
         firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk \
-          --app ${{ secrets.FIREBASE_APP_ID }} \
-          --release-notes "Automated build from GitHub Actions" \
-          --debug
+        --app ${{ secrets.FIREBASE_APP_ID }} \
+        --release-notes "Automated build from GitHub Actions" \
+        --debug
 
