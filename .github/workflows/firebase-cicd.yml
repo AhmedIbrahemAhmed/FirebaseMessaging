@@ -49,6 +49,8 @@ jobs:
     # Step 7: Upload APK to Firebase App Distribution
     - name: Upload APK to Firebase App Distribution
       run: |
+        echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}' > $HOME/service-account.json
+        export GOOGLE_APPLICATION_CREDENTIALS=$HOME/service-account.json
         firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk \
           --app ${{ secrets.FIREBASE_APP_ID }} \
           --release-notes "Automated build from GitHub Actions" \
