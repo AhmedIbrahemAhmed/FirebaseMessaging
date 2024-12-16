@@ -31,12 +31,13 @@ jobs:
     - name: Build APK
       run: flutter build apk --release
 
-    # # Step 5: Install Firebase CLI
-    # - name: Install Firebase CLI
-    #   run: |
-    #     curl -sL https://firebase.tools | bash
-    #     npm install -g firebase-tools  # Installing Firebase CLI using npm
-    #     firebase --version  # Verify that Firebase CLI is installed correctly
+    # Step 5: Install Firebase CLI
+    - name: Install Firebase CLI
+      run: |
+        curl -sL https://firebase.tools | bash
+        # Make sure it's available in the path
+        export PATH=$PATH:/usr/local/bin
+        firebase --version
 
     # Step 6: Authenticate with Firebase using the CI token
     - name: Authenticate with Firebase CLI
