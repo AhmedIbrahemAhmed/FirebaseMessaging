@@ -11,6 +11,7 @@ jobs:
 
     env:
       FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+      FIREBASE_SERVICE_ACCOUNT_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
 
     steps:
     # Step 1: Checkout the code
@@ -44,7 +45,9 @@ jobs:
     # Step 6: Authenticate with Firebase using the CI token
     - name: Authenticate with Firebase CLI
       run: |
-        firebase use --add --token ${{ secrets.FIREBASE_AUTH_TOKEN }}
+        echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}' > $HOME/service-account.json
+        export FIREBASE_SERVICE_ACCOUNT_KEY=$HOME/service-account.json
+
       
     # Step 7: Upload APK to Firebase App Distribution
     - name: Upload APK to Firebase App Distribution
