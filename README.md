@@ -32,3 +32,4 @@ Helpful Guidance:
 ChatGPT offered detailed instructions on integrating Firebase Analytics into a Flutter app, focusing on setup, event tracking, and best practices for capturing analytics data.
 it explained how to log the events to the analytics and create audience based on those events
 to send notifications to them
+test
