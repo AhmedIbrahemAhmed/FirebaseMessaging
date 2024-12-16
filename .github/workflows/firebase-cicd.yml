@@ -3,7 +3,7 @@ name: Firebase CI/CD
 on:
   push:
     branches:
-      - task4_test  # Run the workflow only when changes are pushed to the main branch
+      - task4_test  # Run the workflow only when changes are pushed to the task4_test branch
 
 jobs:
   build:
@@ -11,7 +11,7 @@ jobs:
 
     env:
       FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
-      FIREBASE_SERVICE_ACCOUNT_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
+      GOOGLE_APPLICATION_CREDENTIALS: $HOME/service-account.json
 
     steps:
     # Step 1: Checkout the code
@@ -36,19 +36,16 @@ jobs:
         export PATH=$PATH:/usr/local/bin
         firebase --version
 
-    # Step 5: Build APK or iOS IPA
+    # Step 5: Build APK
     - name: Build APK
       run: flutter build apk --release
 
-    
-
-    # Step 6: Authenticate with Firebase using the CI token
+    # Step 6: Authenticate with Firebase using the service account key
     - name: Authenticate with Firebase CLI
       run: |
         echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}' > $HOME/service-account.json
-        export FIREBASE_SERVICE_ACCOUNT_KEY=$HOME/service-account.json
+        export GOOGLE_APPLICATION_CREDENTIALS=$HOME/service-account.json
 
-      
     # Step 7: Upload APK to Firebase App Distribution
     - name: Upload APK to Firebase App Distribution
       run: |
@@ -56,4 +53,3 @@ jobs:
           --app ${{ secrets.FIREBASE_APP_ID }} \
           --release-notes "Automated build from GitHub Actions" \
           --debug
-
