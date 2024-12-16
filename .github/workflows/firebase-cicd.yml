@@ -33,12 +33,11 @@ jobs:
 
     # Step 6: Upload to Firebase App Distribution
     - name: Upload APK to Firebase App Distribution
-      env:
-        FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
       run: |
-        echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" > firebase.json
-        curl -sL https://firebase.tools | bash
-        firebase login --token "$(cat firebase.json | jq -r '.private_key')"
+        # Authenticate with Firebase CLI using the CI token from GitHub Secrets
+        firebase login:ci --token ${{ secrets.FIREBASE_AUTH_TOKEN }}
+      
+        # Upload APK to Firebase App Distribution
         firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk \
           --app ${{ secrets.FIREBASE_APP_ID }} \
           --release-notes "Automated build from GitHub Actions" \
