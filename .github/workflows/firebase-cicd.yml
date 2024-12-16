@@ -31,12 +31,12 @@ jobs:
     - name: Build APK
       run: flutter build apk --release
 
-    # Step 5: Install Firebase CLI
-    - name: Install Firebase CLI
-      run: |
-        curl -sL https://firebase.tools | bash
-        npm install -g firebase-tools  # Installing Firebase CLI using npm
-        firebase --version  # Verify that Firebase CLI is installed correctly
+    # # Step 5: Install Firebase CLI
+    # - name: Install Firebase CLI
+    #   run: |
+    #     curl -sL https://firebase.tools | bash
+    #     npm install -g firebase-tools  # Installing Firebase CLI using npm
+    #     firebase --version  # Verify that Firebase CLI is installed correctly
 
     # Step 6: Authenticate with Firebase using the CI token
     - name: Authenticate with Firebase CLI
@@ -44,7 +44,7 @@ jobs:
         # Authenticate with Firebase CLI using the CI token from GitHub Secrets
         firebase login:ci --token ${{ secrets.FIREBASE_AUTH_TOKEN }}
       
-        # Step 8: Upload APK to Firebase App Distribution
+    # Step 7: Upload APK to Firebase App Distribution
     - name: Upload APK to Firebase App Distribution
       run: |
         firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk \
