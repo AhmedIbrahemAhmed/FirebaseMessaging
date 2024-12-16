@@ -18,3 +18,17 @@ Firebase Cloud Messaging (FCM) enables sending push notifications and messages t
 ---
 
 This PoC serves as a foundational example for integrating Firebase's core services to build real-time applications with user authentication and push notification capabilities. Each of these services is crucial for creating modern, scalable mobile and web applications with real-time functionality and robust user management.
+
+### 1. CI/CD Pipeline Setup Guidance
+Helpful Guidance:
+
+ChatGPT provided clear step-by-step instructions on setting up a CI/CD pipeline, from version control integration (like GitHub) to configuring build tools and deployment services.
+
+ChatGPT explained how to set up deployment scripts, handle environment variables, and manage secrets securely, all essential components in CI/CD.
+
+### 2. Firebase Analytics Integration Guidance
+Helpful Guidance:
+
+ChatGPT offered detailed instructions on integrating Firebase Analytics into a Flutter app, focusing on setup, event tracking, and best practices for capturing analytics data.
+it explained how to log the events to the analytics and create audience based on those events
+to send notifications to them
