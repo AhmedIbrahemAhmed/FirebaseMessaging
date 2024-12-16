@@ -38,7 +38,7 @@ jobs:
       run: |
         echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" > firebase.json
         curl -sL https://firebase.tools | bash
-        firebase auth:login --no-localhost --token "$(cat firebase.json | jq -r '.private_key')"
+        firebase login --token "$(cat firebase.json | jq -r '.private_key')"
         firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk \
           --app ${{ secrets.FIREBASE_APP_ID }} \
           --release-notes "Automated build from GitHub Actions" \
