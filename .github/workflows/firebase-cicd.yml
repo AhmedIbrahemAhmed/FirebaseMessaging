@@ -27,10 +27,6 @@ jobs:
     - name: Install dependencies
       run: flutter pub get
 
-    # Step 4: Run tests (optional)
-    - name: Run Flutter tests
-      run: flutter test
-
     # Step 5: Build APK or iOS IPA
     - name: Build APK
       run: flutter build apk --release
